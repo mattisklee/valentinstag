@@ -31,8 +31,8 @@
   }
 
   #buttons {
-    display: flex;
-    justify-content: space-around;
+    position: relative;
+    height: 80px;
     margin-top: 20px;
   }
 
@@ -40,20 +40,27 @@
     border: none;
     border-radius: 15px;
     padding: 15px;
-    width: 120px;
     font-size: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
+    position: absolute;
+    bottom: 0;
   }
 
   #yes {
     background: #ff4d88;
     color: white;
+    left: 0;
+    z-index: 2; /* JA über NEIN */
   }
 
   #no {
     background: #ddd;
     color: #555;
+    right: 0;
+    z-index: 1;
+    width: 120px;
+    height: 50px;
   }
 
   .message {
@@ -76,21 +83,20 @@
 </div>
 
 <script>
-  // Variablen
   var yesBtn = document.getElementById('yes');
   var noBtn = document.getElementById('no');
   var msg = document.getElementById('msg');
-  var size = 20;
   var clicks = 0;
+  var baseSize = 120; // Ausgangsbreite JA
+  var sizeIncrement = 15; // Wieviel JA bei jedem Klick wächst
   var messages = [
     "Bist du sicher? 🥺",
     "Wirklich wirklich? 😳",
     "Ich wär sehr lieb 😇",
     "Letzte Chance… 💔",
-    "Okay… aber eigentlich nicht 😈"
+    "Es gibt keine Wahl mehr 😈"
   ];
 
-  // JA Button Klick
   yesBtn.addEventListener('click', function() {
     document.body.innerHTML = `
       <div style="text-align:center; margin-top:50px; font-family:-apple-system;">
@@ -101,20 +107,19 @@
     `;
   });
 
-  // NEIN Button Klick
   noBtn.addEventListener('click', function() {
     clicks++;
-    size += 8; // JA wird größer
-    yesBtn.style.fontSize = size + "px";
-
-    // Nachricht aktualisieren
     msg.innerText = messages[Math.min(clicks-1, messages.length-1)];
 
-    // Wenn JA groß genug, NEIN verschwinden lassen
-    if(size >= 100) {
-      noBtn.style.display = 'none';
-      msg.innerText = "Es gibt keine Wahl mehr 😈";
-    }
+    // JA-Button wächst horizontal und vertikal
+    var newWidth = baseSize + clicks * sizeIncrement;
+    var newHeight = 50 + clicks * 5; // Höhe leicht erhöhen
+    yesBtn.style.width = newWidth + "px";
+    yesBtn.style.height = newHeight + "px";
+
+    // JA-Button überlappt NEIN mehr und mehr
+    yesBtn.style.zIndex = 2;
+    noBtn.style.zIndex = 1;
   });
 </script>
 
