@@ -43,6 +43,7 @@
     width: 120px;
     font-size: 20px;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
 
   #yes {
@@ -59,6 +60,7 @@
     font-size: 16px;
     margin-top: 15px;
     color: #ff4d88;
+    min-height: 20px;
   }
 </style>
 </head>
@@ -74,7 +76,47 @@
 </div>
 
 <script>
+  // Variablen
   var yesBtn = document.getElementById('yes');
-  var noBtn = document.getElem
+  var noBtn = document.getElementById('no');
+  var msg = document.getElementById('msg');
+  var size = 20;
+  var clicks = 0;
+  var messages = [
+    "Bist du sicher? 🥺",
+    "Wirklich wirklich? 😳",
+    "Ich wär sehr lieb 😇",
+    "Letzte Chance… 💔",
+    "Okay… aber eigentlich nicht 😈"
+  ];
 
+  // JA Button Klick
+  yesBtn.addEventListener('click', function() {
+    document.body.innerHTML = `
+      <div style="text-align:center; margin-top:50px; font-family:-apple-system;">
+        <h1>🥰 JAAAA!</h1>
+        <p>Ich freu mich riesig ❤️<br>Unser Date wird perfekt ✨</p>
+        <p>💖💖💖</p>
+      </div>
+    `;
+  });
 
+  // NEIN Button Klick
+  noBtn.addEventListener('click', function() {
+    clicks++;
+    size += 8; // JA wird größer
+    yesBtn.style.fontSize = size + "px";
+
+    // Nachricht aktualisieren
+    msg.innerText = messages[Math.min(clicks-1, messages.length-1)];
+
+    // Wenn JA groß genug, NEIN verschwinden lassen
+    if(size >= 100) {
+      noBtn.style.display = 'none';
+      msg.innerText = "Es gibt keine Wahl mehr 😈";
+    }
+  });
+</script>
+
+</body>
+</html>
