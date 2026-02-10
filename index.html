@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentinstag 💖</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  }
+
+  h1 {
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+
+  .buttons {
+    position: relative;
+    height: 200px;
+  }
+
+  button {
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    width: 140px;
+    font-size: 20px;
+    transition: all 0.3s ease;
+  }
+
+  #yes {
+    background: #ff4d88;
+    color: white;
+  }
+
+  #no {
+    background: #ddd;
+    color: #555;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .message {
+    font-size: 16px;
+    margin-top: 15px;
+    color: #ff4d88;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1>Willst du mein Valentinsdate sein? 💕</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="yes()">JA ❤️</button>
+    <button id="no" onclick="no()">NEIN 💔</button>
+  </div>
+
+  <div class="message" id="msg"></div>
+</div>
+
+<script>
+  let size = 20;
+  let noClicks = 0;
+
+  const messages = [
+    "Bist du sicher? 🥺",
+    "Wirklich wirklich? 😳",
+    "Ich wär sehr lieb 😇",
+    "Letzte Chance… 💔",
+    "Okay… aber eigentlich nicht 😈"
+  ];
+
+  function no() {
+    noClicks++;
+    size += 8;
+    document.getElementById("yes").style.fontSize = size + "px";
+
+    const noBtn = document.getElementById("no");
+    noBtn.style.top = Math.random() * 120 + "px";
+    noBtn.style.left = Math.random() * 120 + "px";
+
+    document.getElementById("msg").innerText =
+      messages[Math.min(noClicks - 1, messages.length - 1)];
+  }
+
+  function yes() {
+    document.getElementById("card").innerHTML = `
+      <h1>🥰 JAAAA!</h1>
+      <p>Ich freu mich riesig ❤️<br>
+      Unser Date wird perfekt ✨<
