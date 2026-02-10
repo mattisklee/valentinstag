@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentinstag 💖</title>
-
 <style>
   body {
     margin: 0;
@@ -31,16 +30,17 @@
     margin-bottom: 25px;
   }
 
-  .buttons {
-    position: relative;
-    height: 200px;
+  #buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
   }
 
   button {
     border: none;
     border-radius: 15px;
     padding: 15px;
-    width: 140px;
+    width: 120px;
     font-size: 20px;
     transition: all 0.3s ease;
   }
@@ -53,9 +53,6 @@
   #no {
     background: #ddd;
     color: #555;
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
 
   .message {
@@ -65,47 +62,19 @@
   }
 </style>
 </head>
-
 <body>
 
-<div class="card" id="card">
+<div class="card">
   <h1>Willst du mein Valentinsdate sein? 💕</h1>
-
-  <div class="buttons">
-    <button id="yes" onclick="yes()">JA ❤️</button>
-    <button id="no" onclick="no()">NEIN 💔</button>
+  <div id="buttons">
+    <button id="yes">JA ❤️</button>
+    <button id="no">NEIN 💔</button>
   </div>
-
   <div class="message" id="msg"></div>
 </div>
 
 <script>
-  let size = 20;
-  let noClicks = 0;
+  var yesBtn = document.getElementById('yes');
+  var noBtn = document.getElem
 
-  const messages = [
-    "Bist du sicher? 🥺",
-    "Wirklich wirklich? 😳",
-    "Ich wär sehr lieb 😇",
-    "Letzte Chance… 💔",
-    "Okay… aber eigentlich nicht 😈"
-  ];
 
-  function no() {
-    noClicks++;
-    size += 8;
-    document.getElementById("yes").style.fontSize = size + "px";
-
-    const noBtn = document.getElementById("no");
-    noBtn.style.top = Math.random() * 120 + "px";
-    noBtn.style.left = Math.random() * 120 + "px";
-
-    document.getElementById("msg").innerText =
-      messages[Math.min(noClicks - 1, messages.length - 1)];
-  }
-
-  function yes() {
-    document.getElementById("card").innerHTML = `
-      <h1>🥰 JAAAA!</h1>
-      <p>Ich freu mich riesig ❤️<br>
-      Unser Date wird perfekt ✨<
